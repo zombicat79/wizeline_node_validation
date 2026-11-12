@@ -10,6 +10,14 @@ export class TodoService {
         return this.repository.getAll()
     }
 
+    async getTodo(id: string): Promise<Todo>{
+        const myTodo = await this.repository.getTodo(id);
+        if (!myTodo) {
+            throw new ApiError("Not found", 404, `${id} does not exist`);
+        }
+        return myTodo; 
+    }
+
     create(input: unknown): Promise<Todo> {
         const parsed = createTodoSchema.safeParse(input)
 

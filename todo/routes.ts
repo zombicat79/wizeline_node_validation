@@ -9,6 +9,11 @@ export function getTodoRouter(todoService: TodoService): Router {
         res.json({ todos, count: todos.length })
     })
 
+    todoRoutes.get('/:id', async (req, res) => {
+        const todo = await todoService.getTodo(req.params.id)
+        res.json(todo)
+    })
+
     todoRoutes.post('/', async (req, res) => {
         const todo = await todoService.create(req.body)
         res.status(201).json({ todo })

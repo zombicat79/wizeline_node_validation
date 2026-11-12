@@ -24,4 +24,10 @@ export class InMemoryTodoRepository implements TodoRepository {
 
         return todo
     }
+
+    async getTodo(id: string): Promise<Todo> {
+        console.log(this.todos.get(id))
+        await setTimeout(SIMULATED_LATENCY_MS)
+        return this.todos.get(id)
+    }
 }
